@@ -4,7 +4,8 @@
  */
 package student_relation_management_system;
 
-import javax.swing.JOptionPane;
+import java.sql.*;
+import javax.swing.*;
 
 /**
  *
@@ -110,12 +111,31 @@ public class adminHome extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = jTextField1.getText();
         String password = jPasswordField1.getText();
-        if(username.equals("admin") && password.equals("pass")) {
-            setVisible(false);
-            new index().setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Username or Password is incorrect!");
+        try {
+            	Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection connection = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/srm", "root", "Rohihani#4264");
+                
+                Statement st = connection.createStatement();
+                ResultSet rs = st.executeQuery("select * from AdminUser where username='"+username+"' and password='"+password+"'");
+                if(rs.next()) {
+                    setVisible(false);
+                    new index().setVisible(true);    
+                
+                } else {
+                    JOptionPane.showMessageDialog(null, "Incorrect Username or Password");
+                }
+                
+                 
+          } 
+        catch( SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
         }
+//        if(username.equals("admin") && password.equals("pass")) {
+//            setVisible(false);
+//            new index().setVisible(true);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Username or Password is incorrect!");
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
