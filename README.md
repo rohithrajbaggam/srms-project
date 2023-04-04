@@ -109,4 +109,3 @@ cath (SQLException | ClassNotFoundException ex) {
 - In our project RS2XML.jar file is used  to display the data in a table format
 - After downloading jar file we need to add to library in our project.
 
-[Celery](https://www.notion.so/Celery-e3c6a004113c4c5ca692468a912079b8)
